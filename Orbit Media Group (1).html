@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orbit Media Group — Paid Search That Pays For Itself</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #10151C;
+    --ink-soft: #414B58;
+    --paper: #F4F5F2;
+    --paper-raised: #FFFFFF;
+    --line: #D8DBD4;
+    --blue: #2851FF;
+    --blue-deep: #1B3AC4;
+    --green: #1B9A6C;
+    --font-display: 'Archivo', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #EDEFEA;
+      --ink-soft: #A7AFB8;
+      --paper: #0D1116;
+      --paper-raised: #161C23;
+      --line: #262E37;
+      --blue: #6E8CFF;
+      --blue-deep: #4E6AE0;
+      --green: #3FCB98;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #EDEFEA;
+    --ink-soft: #A7AFB8;
+    --paper: #0D1116;
+    --paper-raised: #161C23;
+    --line: #262E37;
+    --blue: #6E8CFF;
+    --blue-deep: #4E6AE0;
+    --green: #3FCB98;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  .utility-bar { background: var(--blue-deep); color: #fff; font-size: 0.82rem; padding-top: env(safe-area-inset-top, 0px); }
+  .utility-bar-inner { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; gap: 12px; flex-wrap: wrap; }
+  .utility-bar a { color: #fff; text-decoration: none; font-weight: 600; white-space: nowrap; }
+  .utility-bar a:hover { text-decoration: underline; }
+
+  header.site {
+    position: sticky; top: 0; z-index: 20;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .logo-mark { width: 26px; height: 26px; flex-shrink: 0; }
+  .nav-links { display: flex; gap: 28px; font-size: 0.92rem; }
+  .nav-links a { text-decoration: none; color: var(--ink-soft); transition: color .15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 3px; }
+  .btn-nav { display: none; }
+  @media (min-width: 640px) {
+    .btn-nav { display: inline-flex; }
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-weight: 600; font-size: 0.92rem;
+    padding: 11px 20px; border-radius: 7px; border: 1px solid transparent;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-deep); }
+  .btn-primary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+  .btn-ghost:hover { border-color: var(--ink-soft); }
+
+  /* Hero */
+  .hero { padding: 72px 0 64px; position: relative; overflow: hidden; background: var(--blue); color: #fff; }
+  .hero .eyebrow { color: #CFE0FF; }
+  .hero h1 { color: #fff; }
+  .hero-sub { color: #DCE6FF; }
+  .hero-note { color: #B7C8F2; }
+  .hero .btn-ghost { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .hero .btn-ghost:hover { border-color: #fff; }
+  .hero-bg { position: absolute; top: -140px; right: -180px; width: 640px; height: 640px; opacity: 0.35; pointer-events: none; z-index: 0; }
+  @media (max-width: 860px) { .hero-bg { opacity: 0.22; width: 420px; height: 420px; top: -100px; right: -140px; } }
+  .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .eyebrow { font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue); margin: 0 0 18px; }
+  h1 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+    line-height: 1.06; letter-spacing: -0.015em; margin: 0 0 22px; max-width: 15ch;
+  }
+  .hero-sub { font-size: 1.08rem; color: var(--ink-soft); max-width: 46ch; margin: 0 0 32px; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+  .hero-note { font-size: 0.85rem; color: var(--ink-soft); }
+
+  .metric-card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px;
+    padding: 28px; box-shadow: 0 1px 0 var(--line);
+  }
+  .metric-card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .metric-card-head span:first-child { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
+  .metric-badge { font-family: var(--font-mono); font-size: 0.75rem; color: var(--green); }
+  .metric-big { font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; letter-spacing: -0.02em; margin: 0; }
+  .metric-label { font-size: 0.9rem; color: var(--ink-soft); margin: 4px 0 22px; }
+  .bars { display: flex; align-items: flex-end; gap: 8px; height: 84px; }
+  .bars .bar { flex: 1; background: var(--line); border-radius: 3px 3px 0 0; }
+  .bars .bar.hi { background: var(--blue); }
+  .bars-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-soft); margin-top: 8px; }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-head { max-width: 56ch; margin-bottom: 40px; }
+  .section-head .eyebrow { margin-bottom: 12px; }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.01em; margin: 0 0 12px; }
+  .section-head p { color: var(--ink-soft); margin: 0; font-size: 1rem; }
+
+  /* Services */
+  .services-list { display: flex; flex-direction: column; }
+  .service-row {
+    display: grid; grid-template-columns: 48px 220px 1fr; gap: 20px;
+    padding: 28px 0; border-top: 1px solid var(--line); align-items: start;
+  }
+  .service-row:first-child { border-top: 1px solid var(--line); }
+  @media (max-width: 720px) { .service-row { grid-template-columns: 40px 1fr; gap: 14px; } .service-row .service-name { grid-column: 2; } .service-row .service-desc { grid-column: 2; margin-top: 6px; } }
+  .service-icon {
+    width: 44px; height: 44px; border-radius: 10px; background: var(--paper-raised);
+    border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+  }
+  .service-icon svg { width: 22px; height: 22px; }
+  .service-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+  .service-desc { color: var(--ink-soft); font-size: 0.97rem; max-width: 58ch; }
+
+  /* Audience */
+  .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  @media (max-width: 720px) { .audience-grid { grid-template-columns: repeat(2, 1fr); } }
+  .audience-cell { background: var(--paper-raised); padding: 22px 18px; font-size: 0.92rem; }
+  .audience-cell svg { width: 26px; height: 26px; margin-bottom: 12px; }
+  .audience-cell strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+
+  /* Process */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: step; }
+  @media (max-width: 860px) { .process-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .process-grid { grid-template-columns: 1fr; } }
+  .process-step { counter-increment: step; }
+  .process-step .num { font-family: var(--font-mono); font-size: 0.85rem; color: var(--blue); margin-bottom: 10px; }
+  .process-step .num::before { content: "0" counter(step); }
+  .process-step h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; margin: 0 0 8px; }
+  .process-step p { color: var(--ink-soft); font-size: 0.9rem; margin: 0; }
+
+  /* Founder */
+  .founder-wrap { display: grid; grid-template-columns: 160px 1fr; gap: 32px; align-items: start; }
+  @media (max-width: 640px) { .founder-wrap { grid-template-columns: 1fr; } }
+  .avatar {
+    width: 132px; height: 132px; border-radius: 14px;
+    border: 1px solid var(--line); background: var(--paper-raised);
+    overflow: hidden;
+  }
+  .avatar svg { width: 100%; height: 100%; display: block; }
+  .founder-name { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin: 4px 0 2px; }
+  .founder-title { font-family: var(--font-mono); font-size: 0.8rem; color: var(--blue); margin: 0 0 14px; }
+  .founder-bio { color: var(--ink-soft); max-width: 58ch; }
+
+  /* CTA / contact */
+  .cta-section { text-align: left; }
+  .cta-box {
+    background: var(--ink); color: var(--paper); border-radius: 16px;
+    padding: 48px 40px; display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cta-box { background: var(--paper-raised); border: 1px solid var(--line); } }
+  :root[data-theme="dark"] .cta-box { background: var(--paper-raised); border: 1px solid var(--line); }
+  .cta-box h3 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 8px; max-width: 18ch; }
+  .cta-box p { margin: 0; opacity: 0.75; max-width: 40ch; font-size: 0.95rem; }
+  .cta-box .btn-primary { background: var(--blue); }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 28px 0;
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 0.85rem; color: var(--ink-soft);
+  }
+
+  ::selection { background: var(--blue); color: #fff; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="wrap utility-bar-inner">
+    <span>Free Google Ads account audit — no commitment</span>
+    <a href="#contact">Get a Free Proposal →</a>
+  </div>
+</div>
+<header class="site">
+  <div class="wrap nav">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="13" cy="13" r="11.5" stroke="var(--blue)" stroke-width="2"/>
+        <circle cx="13" cy="13" r="4" fill="var(--blue)"/>
+      </svg>
+      Orbit Media Group
+    </div>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#audience">Who We Serve</a>
+      <a href="#founder">About</a>
+    </nav>
+    <a class="btn btn-primary btn-nav" href="#contact">Request an audit</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="hero-bg" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="320" cy="320" r="300" stroke="#FFFFFF" stroke-width="1.5"/>
+      <circle cx="320" cy="320" r="220" stroke="#FFFFFF" stroke-width="1.5"/>
+      <circle cx="320" cy="320" r="140" stroke="#FFFFFF" stroke-width="1.5"/>
+      <g transform="rotate(-22 320 320)">
+        <ellipse cx="320" cy="320" rx="300" ry="120" stroke="#B9F04E" stroke-width="1.5" opacity="0.7"/>
+      </g>
+      <circle cx="516" cy="230" r="7" fill="#B9F04E"/>
+      <circle cx="140" cy="420" r="5" fill="#FFFFFF"/>
+      <circle cx="320" cy="320" r="10" fill="#B9F04E"/>
+    </svg>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">GOOGLE ADS &amp; PAID SEARCH AGENCY</p>
+        <h1>Every click accounted for. Every dollar working.</h1>
+        <p class="hero-sub">Orbit Media Group builds and manages Google Ads accounts for B2B and SaaS teams who are done paying for clicks that don't convert. Structure, tracking, and testing — run by people who read the auction data, not just the dashboard.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#contact">Request an audit</a>
+          <a class="btn btn-ghost" href="#services">See what we manage</a>
+        </div>
+        <p class="hero-note">Free 20-minute account review — no commitment.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-head">
+          <span>COST PER ACQUISITION</span>
+          <span class="metric-badge">↓ 38% AVG.</span>
+        </div>
+        <p class="metric-big">$41.20</p>
+        <p class="metric-label">Average CAC after 90 days on managed accounts</p>
+        <div class="bars">
+          <div class="bar" style="height: 100%"></div>
+          <div class="bar" style="height: 88%"></div>
+          <div class="bar" style="height: 74%"></div>
+          <div class="bar hi" style="height: 58%"></div>
+          <div class="bar hi" style="height: 47%"></div>
+          <div class="bar hi" style="height: 40%"></div>
+        </div>
+        <div class="bars-labels"><span>WK 1</span><span>WK 4</span><span>WK 8</span><span>WK 12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">CORE SERVICES</p>
+        <h2>What we actually do inside the account</h2>
+        <p>No generic "digital marketing" retainer — every engagement covers the same four disciplines, applied to your funnel.</p>
+      </div>
+      <div class="services-list">
+        <div class="service-row">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="var(--blue)" stroke-width="1.6"/><circle cx="12" cy="12" r="5" stroke="var(--blue)" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="var(--blue)"/></svg></div>
+          <div class="service-name">Google Ads Management &amp; PPC</div>
+          <div class="service-desc">Campaign setup, account structure, ad group architecture, and bid management across Search, Display, and Performance Max — built around how your buyers actually search, not a generic template.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10.5" cy="10.5" r="6.5" stroke="var(--blue)" stroke-width="1.6"/><line x1="15.3" y1="15.3" x2="20.5" y2="20.5" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="service-name">Keyword Strategy &amp; Intent Targeting</div>
+          <div class="service-desc">In-depth B2B and B2C keyword research focused on high-intent terms, with continuous negative keyword optimization so spend stops leaking into searches that were never going to convert.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16L9.5 10.5L13 14L20 6" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6H20V11" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="service-name">Conversion Rate &amp; ROI Optimization</div>
+          <div class="service-desc">Ad copy testing, landing page matching, and quality score improvements that work together to bring your cost-per-click down instead of just your rank.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="13" width="3.4" height="7" rx="0.6" fill="var(--blue)"/><rect x="10.3" y="8" width="3.4" height="12" rx="0.6" fill="var(--blue)"/><rect x="16.6" y="4" width="3.4" height="16" rx="0.6" fill="var(--blue)"/></svg></div>
+          <div class="service-name">Advanced Lead Tracking &amp; Analytics</div>
+          <div class="service-desc">Conversion tracking built for demo requests, form fills, and phone calls — with full-funnel reporting so you can see which campaigns produce pipeline, not just clicks.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">HOW WE WORK</p>
+        <h2>From audit to optimized account, in four steps</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="num"></div>
+          <h4>Free account audit</h4>
+          <p>We review your current campaigns, spend, and tracking setup and flag exactly where budget is leaking.</p>
+        </div>
+        <div class="process-step">
+          <div class="num"></div>
+          <h4>Strategy &amp; structure</h4>
+          <p>We rebuild account architecture around intent — keywords, ad groups, and negatives mapped to your funnel.</p>
+        </div>
+        <div class="process-step">
+          <div class="num"></div>
+          <h4>Launch &amp; track</h4>
+          <p>Conversion tracking goes live for every meaningful action — forms, calls, demo requests — before spend scales.</p>
+        </div>
+        <div class="process-step">
+          <div class="num"></div>
+          <h4>Optimize weekly</h4>
+          <p>Bids, copy, and landing pages get tested on a standing cadence, reported against CAC and pipeline, not just clicks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="audience">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO WE WORK WITH</p>
+        <h2>Built for teams measured on CAC, not impressions</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-cell">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="8" width="18" height="13" rx="1" stroke="var(--blue)" stroke-width="1.5"/><path d="M8 8V5.5C8 4.67 8.67 4 9.5 4H14.5C15.33 4 16 4.67 16 5.5V8" stroke="var(--blue)" stroke-width="1.5"/></svg>
+          <strong>B2B Enterprises</strong>Long sales cycles, multiple stakeholders, high contract value.
+        </div>
+        <div class="audience-cell">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5L12 3Z" stroke="var(--green)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="var(--green)" stroke-width="1.5"/></svg>
+          <strong>SaaS Platforms</strong>Trial and demo funnels where CAC payback period is the metric that matters.
+        </div>
+        <div class="audience-cell">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="3" width="12" height="18" rx="1" stroke="var(--blue)" stroke-width="1.5"/><line x1="9" y1="8" x2="15" y2="8" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="12" x2="15" y2="12" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="16" x2="12.5" y2="16" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <strong>Corporate Services</strong>Legal, financial, and consulting firms competing for qualified inquiries.
+        </div>
+        <div class="audience-cell">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 18L9 11L13 15L20 6" stroke="var(--green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6H20V11" stroke="var(--green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <strong>Growing SMBs</strong>Scaling spend for the first time and need it to hold up under scrutiny.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">LEADERSHIP</p>
+        <h2>About Orbit Media Group</h2>
+      </div>
+      <div class="founder-wrap">
+        <div class="avatar">
+          <svg viewBox="0 0 132 132" xmlns="http://www.w3.org/2000/svg">
+            <rect width="132" height="132" fill="var(--ink)"/>
+            <circle cx="66" cy="54" r="26" fill="var(--paper)" opacity="0.92"/>
+            <path d="M22 132C22 103 41 88 66 88C91 88 110 103 110 132Z" fill="var(--paper)" opacity="0.92"/>
+            <circle cx="104" cy="20" r="10" fill="var(--blue)"/>
+            <circle cx="20" cy="112" r="6" fill="var(--green)"/>
+          </svg>
+        </div>
+        <div>
+          <p class="founder-name">Zaheer Khan</p>
+          <p class="founder-title">FOUNDER &amp; CEO, CO-FOUNDER — ORBIT MEDIA GROUP</p>
+          <p class="founder-bio">Zaheer founded Orbit Media Group to fix a problem most agencies won't say out loud: most Google Ads accounts are structured to hit spend targets, not ROI targets. He leads the agency's account strategy and reporting standards, with a direct focus on lowering CAC for every client on the books.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <div class="wrap">
+      <svg width="100%" height="36" viewBox="0 0 1024 36" preserveAspectRatio="none" style="display:block; margin-bottom: 32px;" aria-hidden="true">
+        <line x1="0" y1="18" x2="1024" y2="18" stroke="var(--line)" stroke-width="1"/>
+        <circle cx="60" cy="18" r="4" fill="var(--blue)"/>
+        <circle cx="512" cy="18" r="4" fill="var(--green)"/>
+        <circle cx="964" cy="18" r="4" fill="var(--blue)"/>
+      </svg>
+      <div class="cta-box">
+        <div>
+          <h3>Get a free account audit</h3>
+          <p>We'll review your current Google Ads account and show you exactly where spend is being wasted — no obligation.</p>
+        </div>
+        <a class="btn btn-primary" href="mailto:hello@orbitmediagroup.com">Request an audit</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; width:100%;">
+    <span>© 2026 Orbit Media Group</span>
+    <span>hello@orbitmediagroup.com</span>
+  </div>
+</footer>
+
+</body>
+</html>
